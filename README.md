@@ -1,4 +1,4 @@
-# Taller 3
+# Taller 4
 
 ### Aprendizaje en Redes Bayesianas
 

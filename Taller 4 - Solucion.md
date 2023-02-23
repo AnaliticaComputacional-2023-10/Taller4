@@ -151,19 +151,39 @@ Los resultados de las distribuciones estimadas a partir de la muestra son los si
 
 - **R**
 
+**Ajuste**
+
 |  R   | P( R )  |
 | :--: | :-----: |
 | R(0) | 0.01005 |
 | R(1) | 0.98995 |
 
+**Teórico**
+
+|  R  | P(R) |
+| :-: | :--: |
+|  V  | 0.01 |
+|  F  | 0.99 |
+
 - **S**
+
+**Ajuste**
 
 |  S   | P( S )  |
 | :--: | :-----: |
 | S(0) | 0.02009 |
 | S(1) | 0.97991 |
 
+**Teórico**
+
+|  S  | P(S) |
+| :-: | :--: |
+|  V  | 0.02 |
+|  F  | 0.98 |
+
 - **A**
+
+**Ajuste**
 
 | P( A &#124; R, S ) |   R   |   R(0)   |        R(0)         |        R(1)        |         R(1)          |
 | :----------------: | :---: | :------: | :-----------------: | :----------------: | :-------------------: |
@@ -171,19 +191,49 @@ Los resultados de las distribuciones estimadas a partir de la muestra son los si
 |        A(0)        |       |  0.9375  | 0.9373104145601617  | 0.2814851981936779 | 0.0008762705923589204 |
 |        A(1)        |       |  0.0625  | 0.06268958543983821 | 0.7185148018063221 |   0.999123729407641   |
 
+**Teórico**
+
+| P ( A &#124; R , S) |   R   |   V   |   V   |   F   |   F   |
+| :-----------------: | :---: | :---: | :---: | :---: | :---: |
+|        **A**        | **S** | **V** | **F** | **V** | **F** |
+|          V          |       | 0.95  | 0.94  | 0.29  | 0.001 |
+|          F          |       | 0.05  | 0.06  | 0.71  | 0.999 |
+
 - **J**
+
+**Ajuste**
 
 | P( J &#124; A ) |        A(0)         |         A(1)         |
 | :-------------: | :-----------------: | :------------------: |
 |      J(0)       | 0.9023929471032746  | 0.050349550867780354 |
 |      J(1)       | 0.09760705289672544 |  0.9496504491322196  |
 
+**Teórico**
+
+| P( J &#124; A ) |  A  |  A   |
+| :-------------: | :-: | :--: |
+|      **J**      |  V  |  F   |
+|        V        | 0.9 | 0.05 |
+|        F        | 0.1 | 0.95 |
+
 - **M**
+
+**Ajuste**
 
 | P( M &#124; A ) |        A(0)         |         A(1)         |
 | :-------------: | :-----------------: | :------------------: |
 |      M(0)       | 0.7015113350125944  | 0.009927651099459416 |
 |      M(1)       | 0.29848866498740556 |  0.9900723489005406  |
+
+**Teórico**
+
+| P( M &#124; A ) |  A  |  A   |
+| :-------------: | :-: | :--: |
+|      **M**      |  V  |  F   |
+|        V        | 0.7 | 0.01 |
+|        F        | 0.3 | 0.99 |
+
+Como se mencionó en el anterior literal, se observa que estas distribuciones se acercan bastante a las distribuciones teóricas, esto resulta obvio al fin y al cabo la muestra de datos se realizó en base a las distribuciones de probabilidad condicionales teóricas. Por lo que sería errado que los resultados fueran distintos. Aún así, es interesante observar que la muestra hecha artificialmente si se ajusta a la distribución.
 
 ---
 

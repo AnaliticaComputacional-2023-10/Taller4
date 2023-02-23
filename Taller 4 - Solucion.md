@@ -239,21 +239,11 @@ Modifique los valores de pseudocounts e interprete los resultados.
 Basado en el supuesto de que el total de `pseudo_counts` es constante (300 mil), se hizo un análisis de sensibilidad de `alpha_0`.
 Definimos
 
-$$ alpha_1 = pseudo\ counts - alpha_0 $$
+$$ \alpha_1 = pseudo\ counts - \alpha_0 $$
 
-$$ alpha_1 = 300,000 - alpha_0 $$
+$$ \alpha_1 = 300,000 - \alpha_0 $$
 
 <br>
-
-Se obtiene la siguiente gráfica:
-
-![Sensibilidad Alpha 0 VS R 0](image/7_Sensibilidad_a0_r0.png)
-
-Podemos ver que el cambio es lineal. Además, así `alpha_0 = pseudo_counts`, podemos ver que la $P(R=0)=0.752513$, a pesar de que en nuestro _Prior_ la probabilidad sea $P(R=0)=1$. Esto se debe a los datos reales que tenemos.
-
-Si el cambio en $P(R=0)$ es lineal, entonces $P(R=1)$ también cambiará linealmente pero con la pendiente negativa. Esto se observa en la siguiente gráfica:
-
-![Sensibilidad Alpha 0 VS R 1](image/7_Sensibilidad_a0_r1.png)
 
 Algunas de las muestras más importantes se observan a continuación:
 
@@ -263,14 +253,17 @@ Algunas de las muestras más importantes se observan a continuación:
 | 150000  | 150000  | 0.377512 | 0.622487 |
 | 300000  |    0    | 0.752513 | 0.247487 |
 
-La distribución original a partir de los datos:
+Con todas las variaciones de $\alpha_0$ Se obtiene la siguiente gráfica:
 
-|  R   |  P(R)   |
-| :--: | :-----: |
-| R(0) | 0.01005 |
-| R(1) | 0.98995 |
+![Sensibilidad Alpha 0 VS R 0](image/7_Sensibilidad_a0_r0.png)
 
-Se puede observar el efecto de implementar _'datos virtuales'_ dado que modificamos las probabilidades teniendo en cuenta nuestro _Prior_.
+Podemos ver que $P(R=0)$ se relaciona linealmente respecto a cambios en $\alpha_0$ con una pendiente positiva.
+
+Además, si el $\alpha_0$ es igual al total de _'datos virtuales'_ ($\alpha_0 = pseudo\ counts \rightarrow \alpha_1 = 0$), la $P(R=0)=0.752513$. Esto nos dice que a pesar de que en nuestro _Prior_ la probabilidad sea $P(R=0)=1$ los _'datos reales'_ siguen manteniendo un peso y afectan la probabilidad.
+
+Si el cambio en $P(R=0)$ es lineal, entonces $P(R=1)$ también cambiará linealmente pero con la pendiente negativa. Esto se demuestra por medio de la siguiente gráfica:
+
+![Sensibilidad Alpha 0 VS R 1](image/7_Sensibilidad_a0_r1.png)
 
 ---
 
@@ -311,6 +304,7 @@ Leemos los datos del archivo
 df = pd.read_csv("Data/data_asia.csv")
 # Drop not useful column
 df.drop('Unnamed: 0', axis=1, inplace=True)
+df.head()
 ```
 
 El dataframe con los datos leídos se ve de la siguiente forma:
@@ -423,7 +417,7 @@ El nodo `xray` esta condicionado por el nodo `either`. Podemos observar que si u
 
 #### - Dysp
 
-Este nodo representa si una persona sufre de dificultad para respirar (dyspnoea).
+Este nodo representa si una persona tiene dificultad para respirar (dyspnoea).
 
 | P( dysp &#124; bronc, either ) |   bronc    | bronc(no)           | bronc(no)           | bronc(yes)         | bronc(yes)          |
 | :----------------------------: | :--------: | ------------------- | ------------------- | ------------------ | ------------------- |

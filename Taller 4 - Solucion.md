@@ -371,7 +371,7 @@ Este nodo representa si una persona tiene cáncer de pulmón.
 |        lung(no)        |  0.9905701842010628  | 0.8993512994033557  |
 |       lung(yes)        | 0.009429815798937148 | 0.10064870059664438 |
 
-El nodo `lung` esta condicionado por el nodo `smoke`. Podemos observar que si una persona fuma aumenta casi en un 10% la probabilidad de tener cáncer de pulmón respecto a si no fumara.
+El nodo `lung` esta condicionado por el nodo `smoke`. Podemos observar que si una persona fuma aumenta casi en un 10% la probabilidad de tener cáncer de pulmón respecto a si no fumara. Estos resultados tienen sentido ya que hay evidencia que fumar está directamente relacionado con el desarrollo de cáncer de pulmón, sin embargo, el aumento en la probabilidad no es tan grande como se imaginaria, posiblemente gran parte de las personas en la muestra eran jóvenes por lo que no han desarrollado el cáncer.
 
 #### - Either
 
@@ -394,7 +394,7 @@ Este nodo representa si una persona tiene bronquitis.
 |        bronc(no)        | 0.7000039956846605  | 0.40153365634885674 |
 |       bronc(yes)        | 0.29999600431533946 | 0.5984663436511433  |
 
-El nodo `bronc` esta condicionado por el nodo `smoke`. Podemos observar que si una persona fuma aumenta considerablemente (30%) la probabilidad de tener tuberculosis respecto a si no fumara.
+El nodo `bronc` esta condicionado por el nodo `smoke`. Podemos observar que si una persona fuma aumenta considerablemente (30%) la probabilidad de tener tuberculosis respecto a si no fumara. Estos resultados tienen sentido ya que hay evidencia que fumar está directamente relacionado con el desarrollo de bronquitis.
 
 #### - Xray
 
@@ -407,6 +407,14 @@ Este nodo representa si una persona toma un examen de rayos x.
 
 El nodo `xray` esta condicionado por el nodo `either`. Podemos observar que si una persona tiene cáncer de pulmón o tuberculosis aumenta considerablemente la probabilidad de tomar un examen de rayos x respecto a si no tuviera ninguna de las enfermedades. Esto tiene sentido, ya que si no tiene ninguna enfermedad no hay necesidad de realizar el examen.
 
-#### -
+#### - Dysp
 
-| :--------: | :------: |
+Este nodo representa si una persona sufre de dificultad para respirar (dyspnoea).
+
+| P( dysp &#124; bronc, either ) |   bronc    | bronc(no)           | bronc(no)           | bronc(yes)         | bronc(yes)          |
+| :----------------------------: | :--------: | ------------------- | ------------------- | ------------------ | ------------------- |
+|            **dysp**            | **either** | **either(no)**      | **either(yes)**     | **either(no)**     | **either(yes)**     |
+|            dysp(no)            |            | 0.8995302463809798  | 0.28692988427501703 | 0.200329122501331  | 0.09483960948396095 |
+|           dysp(yes)            |            | 0.10046975361902023 | 0.713070115724983   | 0.7996708774986689 | 0.905160390516039   |
+
+El nodo `dysp` esta condicionado tanto por el nodo `bronc` como por el nodo `either`. Podemos observar que si una persona no posee ni bronquitis ni sufre de tuberculosis o cáncer de pulmón la probabilidad de sufrir de dificultad para respirar es baja. Sin embargo, en caso de tener bronquitis o sufrir ya sea de tuberculosis o cáncer de pulmón aumenta hasta en un 70% la probabilidad de sufrir dificultad para respirar. Finalmente, si tiene bronquitis y también tiene tuberculosis o cáncer de pulmón la probabilidad de tener dificultad para respirar llega a 0.9. Todos estos resultados tienen sentido ya que son enfermedades que afectan directamente la capacidad pulmonar de la persona y causando con mayor probabilidad dificultad para respirar.

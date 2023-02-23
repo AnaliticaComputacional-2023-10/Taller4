@@ -35,6 +35,13 @@ Se generaron 100,000 números aleatorios que siguen la distribución definida po
 
 A partir de esto se crea un nuevo modelo con la misma estructura, pero sin definir los parámetros (probabilidades).
 
+```py
+from pgmpy.models import BayesianNetwork
+
+# Estructura de la red incluyendo los arcos y nodos
+mod_fit_mv = BayesianNetwork([("R","A"),("S","A"),("A","J"),("A","M")])
+```
+
 Ahora queremos a partir de los 100,000 datos generados que el nuevo grafo se ajuste a la distribución de estos datos.
 
 Usamos el siguiente código:
@@ -56,21 +63,25 @@ cpdem_a = emv.estimate_cpd(node='A')
 print(cpdem_a)
 ```
 
+Obtenemos los siguientes resultados:
+
 - **R**
 
 Distribución estimada a partir de los datos:
 
-|  R   |  P(R)   |
+|  R   | P( R )  |
 | :--: | :-----: |
 | R(0) | 0.01005 |
 | R(1) | 0.98995 |
 
 Comparamos con la distribución original teórica:
 
-|  R  | P(R) |
-| :-: | :--: |
-|  V  | 0.01 |
-|  F  | 0.99 |
+|  R  | P( R ) |
+| :-: | :----: |
+|  V  |  0.01  |
+|  F  |  0.99  |
+
+Se puede observar que son bastante similares.
 
 <br>
 
@@ -78,17 +89,17 @@ Comparamos con la distribución original teórica:
 
 Distribución estimada a partir de los datos:
 
-|  S   |  P(S)   |
+|  S   | P( S )  |
 | :--: | :-----: |
 | S(0) | 0.02009 |
 | S(1) | 0.97991 |
 
 Comparamos con la distribución original teórica:
 
-|  S  | P(S) |
-| :-: | :--: |
-|  V  | 0.02 |
-|  F  | 0.98 |
+|  S  | P( S ) |
+| :-: | :----: |
+|  V  |  0.02  |
+|  F  |  0.98  |
 
 Se puede observar que son bastante similares.
 
@@ -98,11 +109,11 @@ Se puede observar que son bastante similares.
 
 Distribución estimada a partir de los datos:
 
-| P(A &#124; R, S |   R   |   R(0)   |        R(0)         |        R(1)        |         R(1)          |
-| :-------------: | :---: | :------: | :-----------------: | :----------------: | :-------------------: |
-|      **A**      | **S** | **S(0)** |      **S(1)**       |      **S(0)**      |       **S(1)**        |
-|      A(0)       |       |  0.9375  | 0.9373104145601617  | 0.2814851981936779 | 0.0008762705923589204 |
-|      A(1)       |       |  0.0625  | 0.06268958543983821 | 0.7185148018063221 |   0.999123729407641   |
+| P( A &#124; R, S ) |   R   |   R(0)   |        R(0)         |        R(1)        |         R(1)          |
+| :----------------: | :---: | :------: | :-----------------: | :----------------: | :-------------------: |
+|       **A**        | **S** | **S(0)** |      **S(1)**       |      **S(0)**      |       **S(1)**        |
+|        A(0)        |       |  0.9375  | 0.9373104145601617  | 0.2814851981936779 | 0.0008762705923589204 |
+|        A(1)        |       |  0.0625  | 0.06268958543983821 | 0.7185148018063221 |   0.999123729407641   |
 
 Comparamos con la distribución original teórica:
 
@@ -136,43 +147,43 @@ for i in mod_fit_mv.nodes():
 
 **R/**
 
-Los resultados de las distribuciones estimades a partir de la muestra son los siguientes:
+Los resultados de las distribuciones estimadas a partir de la muestra son los siguientes:
 
 - **R**
 
-|  R   |  P(R)   |
+|  R   | P( R )  |
 | :--: | :-----: |
 | R(0) | 0.01005 |
 | R(1) | 0.98995 |
 
 - **S**
 
-|  S   |  P(S)   |
+|  S   | P( S )  |
 | :--: | :-----: |
 | S(0) | 0.02009 |
 | S(1) | 0.97991 |
 
 - **A**
 
-| P(A &#124; R, S |   R   |   R(0)   |        R(0)         |        R(1)        |         R(1)          |
-| :-------------: | :---: | :------: | :-----------------: | :----------------: | :-------------------: |
-|      **A**      | **S** | **S(0)** |      **S(1)**       |      **S(0)**      |       **S(1)**        |
-|      A(0)       |       |  0.9375  | 0.9373104145601617  | 0.2814851981936779 | 0.0008762705923589204 |
-|      A(1)       |       |  0.0625  | 0.06268958543983821 | 0.7185148018063221 |   0.999123729407641   |
+| P( A &#124; R, S ) |   R   |   R(0)   |        R(0)         |        R(1)        |         R(1)          |
+| :----------------: | :---: | :------: | :-----------------: | :----------------: | :-------------------: |
+|       **A**        | **S** | **S(0)** |      **S(1)**       |      **S(0)**      |       **S(1)**        |
+|        A(0)        |       |  0.9375  | 0.9373104145601617  | 0.2814851981936779 | 0.0008762705923589204 |
+|        A(1)        |       |  0.0625  | 0.06268958543983821 | 0.7185148018063221 |   0.999123729407641   |
 
 - **J**
 
-|  A   |        A(0)         |         A(1)         |
-| :--: | :-----------------: | :------------------: |
-| J(0) | 0.9023929471032746  | 0.050349550867780354 |
-| J(1) | 0.09760705289672544 |  0.9496504491322196  |
+| P( J &#124; A ) |        A(0)         |         A(1)         |
+| :-------------: | :-----------------: | :------------------: |
+|      J(0)       | 0.9023929471032746  | 0.050349550867780354 |
+|      J(1)       | 0.09760705289672544 |  0.9496504491322196  |
 
 - **M**
 
-|  A   |        A(0)         |         A(1)         |
-| :--: | :-----------------: | :------------------: |
-| M(0) | 0.7015113350125944  | 0.009927651099459416 |
-| M(1) | 0.29848866498740556 |  0.9900723489005406  |
+| P( M &#124; A ) |        A(0)         |         A(1)         |
+| :-------------: | :-----------------: | :------------------: |
+|      M(0)       | 0.7015113350125944  | 0.009927651099459416 |
+|      M(1)       | 0.29848866498740556 |  0.9900723489005406  |
 
 ---
 
@@ -213,6 +224,8 @@ Datos: 100,000 reales
 | R(0) | 0.01005 |
 | R(1) | 0.98995 |
 
+Se observa que nuestro prior modifica acertadamente la distribución de probabilidad condicional de $R$.
+
 <br>
 
 #### 7.2
@@ -227,6 +240,7 @@ Basado en el supuesto de que el total de `pseudo_counts` es constante (300 mil),
 Definimos
 
 $$ alpha_1 = pseudo\ counts - alpha_0 $$
+
 $$ alpha_1 = 300,000 - alpha_0 $$
 
 <br>
